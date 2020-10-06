@@ -1,4 +1,6 @@
-import { Animal, ActionTypes, ADD_ANIMAL } from './types';
+import {
+  Animal, ActionTypes, ADD_ANIMAL, UPDATE_ANIMAL,
+} from './types';
 
 const mockAnimals: Animal[] = [
   {
@@ -142,6 +144,14 @@ export default (state = initialState, action: ActionTypes): Animal[] => {
         ...state,
         { ...action.payload },
       ];
+    }
+    case UPDATE_ANIMAL: {
+      return state.map((cage) => {
+        if (cage.id === action.payload.id) {
+          return { ...action.payload };
+        }
+        return { ...cage };
+      });
     }
     default:
       return state;
