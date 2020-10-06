@@ -7,11 +7,11 @@ import Modal from './modal';
 interface Props {
   animals: Animal[];
   onAdd: (animal: Animal) => void;
-  onChange: (animal: Animal) => void;
+  onUpdate: (animal: Animal) => void;
 }
 
 export default ({
-  animals, onAdd, onChange,
+  animals, onAdd, onUpdate,
 }: Props) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const [nextId, setNextId] = React.useState<number>(animals.length + 1);
@@ -59,7 +59,7 @@ export default ({
       <div className="row mt-2">
         <div className="col-12 pl-0 pr-0">
           <div className="list-group">
-            {animals.map((animal) => <Item {...animal} onChange={onChange} />)}
+            {animals.map((animal) => <Item {...animal} onChange={onUpdate} />)}
           </div>
         </div>
       </div>

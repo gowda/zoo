@@ -6,26 +6,19 @@ import {
 
 import Greeting from './greeting';
 import Cages from './cages';
-import Animals from './animals';
+import Animals from '../containers/animals';
 import { Cage } from '../store/cages/types';
-import { Animal } from '../store/animals/types';
 
 interface Props {
   cages: Cage[];
-  animals: Animal[];
   addCage: (cage: Cage) => void;
   updateCage: (cage: Cage) => void;
-  addAnimal: (animal: Animal) => void;
-  updateAnimal: (animal: Animal) => void;
 }
 
 export default ({
   cages,
-  animals,
   addCage,
   updateCage,
-  addAnimal,
-  updateAnimal,
 }: Props) => (
   <div className="container h-100">
     <div className="row h-100 align-items-center justify-content-center">
@@ -36,22 +29,16 @@ export default ({
             <Route path="/cages">
               <Cages
                 cages={cages}
-                animals={animals}
                 onAdd={addCage}
                 onChange={updateCage}
               />
             </Route>
             <Route path="/animals">
-              <Animals
-                animals={animals}
-                onAdd={addAnimal}
-                onChange={updateAnimal}
-              />
+              <Animals />
             </Route>
             <Route path="/">
               <Cages
                 cages={cages}
-                animals={animals}
                 onAdd={addCage}
                 onChange={updateCage}
               />

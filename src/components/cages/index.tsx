@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Animal } from '../../store/animals/types';
 import { Cage } from '../../store/cages/types';
 
 import Item from './item';
@@ -7,13 +6,12 @@ import Modal from './modal';
 
 interface Props {
   cages: Cage[];
-  animals: Animal[];
   onAdd: (cage: Cage) => void;
   onChange: (cage: Cage) => void;
 }
 
 export default ({
-  cages, animals, onAdd, onChange,
+  cages, onAdd, onChange,
 }: Props) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const [nextId, setNextId] = React.useState<number>(cages.length + 1);
@@ -61,7 +59,7 @@ export default ({
       <div className="row mt-2">
         <div className="col-12 pl-0 pr-0">
           <div className="list-group">
-            {cages.map((cage) => <Item {...cage} animals={animals} onChange={onChange} />)}
+            {cages.map((cage) => <Item {...cage} onChange={onChange} />)}
           </div>
         </div>
       </div>
