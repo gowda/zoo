@@ -27,7 +27,10 @@ const config: Configuration = {
     filename: 'bundle.js',
   },
   plugins: [
-    new CopyPlugin([{ from: 'styles/**/*.css', to: 'css', flatten: true }]),
+    new CopyPlugin({
+      patterns:
+      [{ from: 'styles/**/*.css', to: 'css', flatten: true }],
+    }),
     new HtmlWebpackPlugin(
       process.env.NODE_ENV === 'test' ? {
         base: `file://${__dirname}/dist/`,

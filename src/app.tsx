@@ -5,6 +5,7 @@ export default () => (
     <div className="row h-100 align-items-center justify-content-center">
       <div className="col-auto">
         <h1 className="engraved">Hello, world!</h1>
+        <h2 className="engraved">Welcome to the virtual zoo</h2>
       </div>
     </div>
   </div>

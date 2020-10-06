@@ -1,16 +1,14 @@
-# react.ts.template
-![](https://github.com/gowda/react.ts.template/workflows/lint-and-tests/badge.svg)
-![](https://github.com/gowda/react.ts.template/workflows/features/badge.svg)
+# zoo
+![](https://github.com/gowda/zoo/workflows/lint-and-tests/badge.svg)
+![](https://github.com/gowda/zoo/workflows/features/badge.svg)
 
-template for react application in typescript.
+virtual zoo web application
 
 ## Usage
-`react-app` is assumed as name of the application to be created.
-
 #### Clone the repository
 ```bash
-$ git clone git@github.com:gowda/react.ts.template.git react-app
-$ cd react-app
+$ git clone git@github.com:gowda/zoo.git
+$ cd zoo
 ```
 
 #### Install dependencies
