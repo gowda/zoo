@@ -1,5 +1,9 @@
 import * as React from 'react';
 
+import {
+  BrowserRouter as Router, Switch, Route, Link,
+} from 'react-router-dom';
+
 import Greeting from './greeting';
 import Cages from './cages';
 import Animals from './animals';
@@ -16,73 +20,73 @@ interface Props {
 }
 
 export default ({
-  cages, animals, addCage, updateCage, addAnimal, updateAnimal,
-}: Props) => {
-  const [showAnimals, setShowAnimals] = React.useState<boolean>(false);
+  cages,
+  animals,
+  addCage,
+  updateCage,
+  addAnimal,
+  updateAnimal,
+}: Props) => (
+  <div className="container h-100">
+    <div className="row h-100 align-items-center justify-content-center">
+      <div className="col-8 mx-auto">
+        <Greeting />
+        <Router>
+          <Switch>
+            <Route path="/cages">
+              <Cages
+                cages={cages}
+                animals={animals}
+                onAdd={addCage}
+                onChange={updateCage}
+              />
+            </Route>
+            <Route path="/animals">
+              <Animals
+                animals={animals}
+                onAdd={addAnimal}
+                onChange={updateAnimal}
+              />
+            </Route>
+            <Route path="/">
+              <Cages
+                cages={cages}
+                animals={animals}
+                onAdd={addCage}
+                onChange={updateCage}
+              />
+            </Route>
+          </Switch>
 
-  return (
-    <div className="container h-100">
-      <div className="row h-100 align-items-center justify-content-center">
-        <div className="col-8 mx-auto">
-          <Greeting />
-          {
-            showAnimals
-              ? (
-                <Animals
-                  animals={animals}
-                  onAdd={addAnimal}
-                  onChange={updateAnimal}
-                />
-              )
-              : (
-                <Cages
-                  cages={cages}
-                  animals={animals}
-                  onAdd={addCage}
-                  onChange={updateCage}
-                />
-              )
-
-          }
           <div className="row">
             <div className="col-12 pl-0 pr-0">
               <div className="list-group list-group-flush list-group-horizontal d-flex justify-content-center">
-                <div
+                <Link
+                  to="/categories"
                   className="list-group-item"
                   style={{ backgroundColor: 'transparent', border: 'none' }}
                 >
                   Categories
-                </div>
-                {
-                  showAnimals ? (
-                    <div
-                      role="button"
-                      tabIndex={0}
-                      className="list-group-item"
-                      style={{ backgroundColor: 'transparent', border: 'none' }}
-                      onClick={() => setShowAnimals(false)}
-                      onKeyPress={() => setShowAnimals(false)}
-                    >
-                      Cages
-                    </div>
-                  ) : (
-                    <div
-                      role="button"
-                      tabIndex={0}
-                      className="list-group-item"
-                      style={{ backgroundColor: 'transparent', border: 'none' }}
-                      onClick={() => setShowAnimals(true)}
-                      onKeyPress={() => setShowAnimals(true)}
-                    >
-                      Animals
-                    </div>
-                  )
-                }
+                </Link>
+                <Link
+                  to="/"
+                  className="list-group-item"
+                  style={{ backgroundColor: 'transparent', border: 'none' }}
+                >
+                  Cages
+                </Link>
+                <Link
+                  to="/animals"
+                  className="list-group-item"
+                  style={{ backgroundColor: 'transparent', border: 'none' }}
+                >
+                  Animals
+                </Link>
               </div>
             </div>
           </div>
-        </div>
+        </Router>
       </div>
     </div>
-  );
-};
+  </div>
+);
