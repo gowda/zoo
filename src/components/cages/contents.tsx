@@ -1,6 +1,5 @@
 import * as React from 'react';
-
-import { Animal } from '../animals/types';
+import { Animal } from '../../store/animals/types';
 
 interface Props {
   contents: Animal[];

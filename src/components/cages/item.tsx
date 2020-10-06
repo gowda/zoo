@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { Animal } from '../animals/types';
 
 import Modal from './modal';
 import SelectionModal from '../animals/selection-modal';
 import Contents from './contents';
+import { Cage } from '../../store/cages/types';
+import { Animal } from '../../store/animals/types';
 
-import { Cage } from './types';
-
-type Props = Cage & { onChange: (c: Cage) => void};
+type Props = Cage & { animals: Animal[], onChange: (c: Cage) => void};
 
 export default ({
   id,
@@ -15,6 +14,7 @@ export default ({
   description,
   lastUpdated,
   contents,
+  animals,
   onChange,
 }: Props) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
@@ -80,6 +80,7 @@ export default ({
         showSelectionModal
         && (
         <SelectionModal
+          animals={animals}
           onClose={() => setShowSelectionModal(false)}
           onSelect={(animal: Animal) => {
             onChange({

@@ -1,11 +1,4 @@
-import * as React from 'react';
-
-import { Animal } from './types';
-import FilterableList from './filterable-list';
-
-interface Props {
-  onSelect: (animal: Animal) => void;
-}
+import { Animal, ActionTypes, ADD_ANIMAL } from './types';
 
 const mockAnimals: Animal[] = [
   {
@@ -140,45 +133,17 @@ const mockAnimals: Animal[] = [
   },
 ];
 
-const colors: string[] = [
-  'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark',
-];
+const initialState: Animal[] = mockAnimals;
 
-export default ({ onSelect }: Props) => {
-  const [query, setQuery] = React.useState<string>('');
-
-  return (
-    <>
-      <div className="form-group">
-        <div className="row">
-          <div className="col-12">
-            <input
-              id="animal-select-form-query"
-              type="text"
-              className="form-control"
-              placeholder="Search for animal"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
-            />
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
-          {FilterableList(mockAnimals, 'name', query).map(
-            (animal, index) => (
-              <span
-                role="button"
-                tabIndex={0}
-                className={`mr-1 badge badge-${colors[(index % colors.length)]}`}
-                onClick={() => onSelect(animal)}
-                onKeyPress={() => onSelect(animal)}
-              >
-                {animal.name}
-              </span>
-            ),
-          )}
-        </div>
-      </div>
-    </>
-  );
+export default (state = initialState, action: ActionTypes): Animal[] => {
+  switch (action.type) {
+    case ADD_ANIMAL: {
+      return [
+        ...state,
+        { ...action.payload },
+      ];
+    }
+    default:
+      return state;
+  }
 };

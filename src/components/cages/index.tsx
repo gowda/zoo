@@ -1,17 +1,20 @@
 import * as React from 'react';
+import { Animal } from '../../store/animals/types';
+import { Cage } from '../../store/cages/types';
 
 import Item from './item';
 import Modal from './modal';
 
-import { Cage } from './types';
-
 interface Props {
   cages: Cage[];
+  animals: Animal[];
   onAdd: (cage: Cage) => void;
   onChange: (cage: Cage) => void;
 }
 
-export default ({ cages, onAdd, onChange }: Props) => {
+export default ({
+  cages, animals, onAdd, onChange,
+}: Props) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const [nextId, setNextId] = React.useState<number>(cages.length + 1);
 
@@ -58,7 +61,7 @@ export default ({ cages, onAdd, onChange }: Props) => {
       <div className="row mt-2">
         <div className="col-12 pl-0 pr-0">
           <div className="list-group">
-            {cages.map((cage) => <Item {...cage} onChange={onChange} />)}
+            {cages.map((cage) => <Item {...cage} animals={animals} onChange={onChange} />)}
           </div>
         </div>
       </div>
