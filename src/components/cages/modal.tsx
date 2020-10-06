@@ -3,6 +3,7 @@ import * as React from 'react';
 import Form from './form';
 
 interface Props {
+  title: string;
   name?: string;
   description?: string;
   onClose: () => void;
@@ -10,7 +11,7 @@ interface Props {
 }
 
 export default ({
-  name, description, onClose, onSave,
+  title, name, description, onClose, onSave,
 }: Props) => {
   const [cage, setCage] = React.useState<any>({ name, description });
 
@@ -26,7 +27,7 @@ export default ({
       >
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Modal title</h5>
+            <h5 className="modal-title">{title}</h5>
             <button
               type="button"
               className="close"

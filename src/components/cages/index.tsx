@@ -1,8 +1,10 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
+
 import { Cage } from '../../store/cages/types';
 
+import Editor from './editor';
 import Item from './item';
-import Modal from './modal';
 
 interface Props {
   cages: Cage[];
@@ -10,10 +12,9 @@ interface Props {
   onUpdate: (cage: Cage) => void;
 }
 
-export default ({
+const Component = ({
   cages, onAdd, onUpdate,
 }: Props) => {
-  const [showModal, setShowModal] = React.useState<boolean>(false);
   const [nextId, setNextId] = React.useState<number>(cages.length + 1);
 
   return (
@@ -33,29 +34,17 @@ export default ({
           )
       }
       <div className="row">
-        <button
-          type="button"
-          className="col-12 btn btn-success mx-auto"
-          onClick={() => setShowModal(true)}
-        >
-          Add new cage
-        </button>
-      </div>
-      {
-        showModal
-        && (
-        <Modal
-          onClose={() => setShowModal(false)}
-          onSave={(name: string, description: string) => {
+        <Editor
+          variant="new"
+          label="Add new cage"
+          onChange={(n, d) => {
             onAdd({
-              id: `${nextId}`, name, description, lastUpdated: 'Just now', contents: [],
+              id: `${nextId}`, name: n, description: d, lastUpdated: 'Just now', contents: [],
             });
             setNextId(nextId + 1);
-            setShowModal(false);
           }}
         />
-        )
-      }
+      </div>
       <div className="row mt-2">
         <div className="col-12 pl-0 pr-0">
           <div className="list-group">
@@ -66,3 +55,24 @@ export default ({
     </>
   );
 };
+
+Component.propTypes = {
+  cages: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      contents: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired,
+          description: PropTypes.string.isRequired,
+        }),
+      ).isRequired,
+    }),
+  ),
+  onAdd: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+};
+
+export default Component;

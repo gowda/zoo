@@ -1,94 +1,75 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 
-import Modal from './modal';
-import SelectionModal from '../../containers/animals/selection-modal';
 import Contents from './contents';
+import Editor from './editor';
+import AnimalSelector from './animal-selector';
 import { Cage } from '../../store/cages/types';
 import { Animal } from '../../store/animals/types';
 
 type Props = Cage & { onChange: (c: Cage) => void};
 
-export default ({
+const Component = ({
   id,
   name,
   description,
   lastUpdated,
   contents,
   onChange,
-}: Props) => {
-  const [showModal, setShowModal] = React.useState<boolean>(false);
-  const [showSelectionModal, setShowSelectionModal] = React.useState<boolean>(false);
-
-  return (
-    <>
-      <div
-        className="list-group-item list-group-item-action flex-column align-items-start"
-      >
-        <div className="d-flex w-100 justify-content-between align-items-center">
-          <h5>{name}</h5>
-          <span className="badge badge-primary badge-pill">
-            {contents.length}
-          </span>
+}: Props) => (
+  <>
+    <div
+      className="list-group-item list-group-item-action flex-column align-items-start"
+    >
+      <div className="d-flex w-100 justify-content-between align-items-center">
+        <h5>{name}</h5>
+        <span className="badge badge-primary badge-pill">
+          {contents.length}
+        </span>
+      </div>
+      <p className="mb-1">{description}</p>
+      <Contents
+        contents={contents}
+        onChange={(c: Animal[]) => onChange({
+          id, name, description, contents: c, lastUpdated: 'Just now',
+        })}
+      />
+      <small className="text-muted">{lastUpdated}</small>
+      <div className="row">
+        <div className="col-auto">
+          <Editor
+            name={name}
+            description={description}
+            onChange={(n, d) => onChange({
+              name: n, description: d, id, lastUpdated, contents,
+            })}
+          />
         </div>
-        <p className="mb-1">{description}</p>
-        <Contents
-          contents={contents}
-          onChange={(c: Animal[]) => onChange({
-            id, name, description, contents: c, lastUpdated: 'Just now',
-          })}
-        />
-        <small className="text-muted">{lastUpdated}</small>
-        <div className="row">
-          <div className="col-auto">
-            <button
-              type="button"
-              className="btn btn-outline-secondary"
-              onClick={() => setShowModal(true)}
-            >
-              Edit
-            </button>
-          </div>
-          <div className="col-auto">
-            <button
-              type="button"
-              className="btn btn-outline-info"
-              onClick={() => setShowSelectionModal(true)}
-            >
-              Add animal
-            </button>
-          </div>
+        <div className="col-auto">
+          <AnimalSelector
+            onSelect={(a: Animal) => onChange({
+              id, name, description, lastUpdated: 'Just now', contents: [...contents, a],
+            })}
+          />
         </div>
       </div>
-      {
-        showModal
-        && (
-        <Modal
-          name={name}
-          description={description}
-          onClose={() => setShowModal(false)}
-          onSave={(n: string, d: string) => {
-            onChange({
-              id, name: n, description: d, lastUpdated: 'Just now', contents,
-            });
-            setShowModal(false);
-          }}
-        />
-        )
-      }
-      {
-        showSelectionModal
-        && (
-        <SelectionModal
-          onClose={() => setShowSelectionModal(false)}
-          onSelect={(animal: Animal) => {
-            onChange({
-              id, name, description, lastUpdated: 'Just now', contents: [...contents, animal],
-            });
-            setShowSelectionModal(false);
-          }}
-        />
-        )
-      }
-    </>
-  );
+    </div>
+  </>
+);
+
+Component.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  lastUpdated: PropTypes.string.isRequired,
+  contents: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string,
+    }),
+  ),
+  onChange: PropTypes.func.isRequired,
 };
+
+export default Component;
