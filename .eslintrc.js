@@ -16,6 +16,19 @@ module.exports = {
             {
                 "devDependencies": true
             }
-        ]
+        ],
+        "react/jsx-props-no-spreading": "off",
+        "jsx-a11y/label-has-associated-control": [
+            "error",
+            {
+              "labelComponents": [],
+              "labelAttributes": [],
+              "controlComponents": [],
+              "assert": "either",
+              "depth": 25
+            }
+        ],
+        "react/require-default-props": "off",
+        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
     }
 }
