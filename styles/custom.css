@@ -1,8 +1,8 @@
 html, body {
   background: #563E7C;
   height: 100%!important;
-  color: white;
   font-weight: bold;
+  color: #ffcfcf;
 }
 
 div.app-container {
@@ -15,5 +15,11 @@ div.app-container {
   -moz-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: rgba(245,245,245,0.7) 2px 2px 1px;
+  text-shadow: rgba(255,207,207,0.7) 2px 2px 1px;
+}
+
+.modal.show {
+  color: black;
+  display: block;
+  background-color: rgba(0,0,0,0.7);
 }
