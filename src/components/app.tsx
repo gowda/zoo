@@ -5,21 +5,10 @@ import {
 } from 'react-router-dom';
 
 import Greeting from './greeting';
-import Cages from './cages';
+import Cages from '../containers/cages';
 import Animals from '../containers/animals';
-import { Cage } from '../store/cages/types';
 
-interface Props {
-  cages: Cage[];
-  addCage: (cage: Cage) => void;
-  updateCage: (cage: Cage) => void;
-}
-
-export default ({
-  cages,
-  addCage,
-  updateCage,
-}: Props) => (
+export default () => (
   <div className="container h-100">
     <div className="row h-100 align-items-center justify-content-center">
       <div className="col-8 mx-auto">
@@ -27,21 +16,13 @@ export default ({
         <Router>
           <Switch>
             <Route path="/cages">
-              <Cages
-                cages={cages}
-                onAdd={addCage}
-                onChange={updateCage}
-              />
+              <Cages />
             </Route>
             <Route path="/animals">
               <Animals />
             </Route>
             <Route path="/">
-              <Cages
-                cages={cages}
-                onAdd={addCage}
-                onChange={updateCage}
-              />
+              <Cages />
             </Route>
           </Switch>
 

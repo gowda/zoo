@@ -7,11 +7,11 @@ import Modal from './modal';
 interface Props {
   cages: Cage[];
   onAdd: (cage: Cage) => void;
-  onChange: (cage: Cage) => void;
+  onUpdate: (cage: Cage) => void;
 }
 
 export default ({
-  cages, onAdd, onChange,
+  cages, onAdd, onUpdate,
 }: Props) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const [nextId, setNextId] = React.useState<number>(cages.length + 1);
@@ -59,7 +59,7 @@ export default ({
       <div className="row mt-2">
         <div className="col-12 pl-0 pr-0">
           <div className="list-group">
-            {cages.map((cage) => <Item {...cage} onChange={onChange} />)}
+            {cages.map((cage) => <Item {...cage} onChange={onUpdate} />)}
           </div>
         </div>
       </div>
