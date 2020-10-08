@@ -15,29 +15,29 @@ interface Props {
 const Component = ({
   label, variant, name, description, onChange,
 }: Props) => {
-  const [cage, setCage] = React.useState<any>({ name, description });
+  const [animal, setAnimal] = React.useState<any>({ name, description });
 
   return (
     <>
-      <ButtonForDailog label={label} variant={variant} title={variant === 'new' ? 'New cage' : 'Edit cage'}>
+      <ButtonForDailog label={label} variant={variant} title={variant === 'new' ? 'New animal' : 'Edit animal'}>
         <Form
-          name={cage.name}
-          description={cage.description}
-          onChange={(n, d) => setCage({ name: n, description: d })}
+          name={animal.name}
+          description={animal.description}
+          onChange={(n, d) => setAnimal({ name: n, description: d })}
         />
         <div className="row">
           <div className="col-auto">
             <button
               type="button"
               className="btn btn-secondary"
-              onClick={() => setCage({ name, description })}
+              onClick={() => setAnimal({ name, description })}
             >
               Reset
             </button>
             <button
               type="button"
               className="ml-2 btn btn-primary"
-              onClick={() => onChange(cage.name, cage.description)}
+              onClick={() => onChange(animal.name, animal.description)}
             >
               Save changes
             </button>

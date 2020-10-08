@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Animal } from '../../store/animals/types';
 
+import Editor from './editor';
 import Item from './item';
-import Modal from './modal';
 
 interface Props {
   animals: Animal[];
@@ -12,13 +12,9 @@ interface Props {
 
 export default ({
   animals, onAdd, onUpdate,
-}: Props) => {
-  const [showModal, setShowModal] = React.useState<boolean>(false);
-  const [nextId, setNextId] = React.useState<number>(animals.length + 1);
-
-  return (
-    <>
-      {
+}: Props) => (
+  <>
+    {
         animals.length === 0
           && (
           <>
@@ -32,37 +28,23 @@ export default ({
           </>
           )
       }
-      <div className="row">
-        <button
-          type="button"
-          className="col-12 btn btn-success mx-auto"
-          onClick={() => setShowModal(true)}
-        >
-          Add new cage
-        </button>
-      </div>
-      {
-        showModal
-        && (
-        <Modal
-          onClose={() => setShowModal(false)}
-          onSave={(name: string, description: string) => {
-            onAdd({
-              id: `${nextId}`, name, description,
-            });
-            setNextId(nextId + 1);
-            setShowModal(false);
-          }}
+    <div className="row">
+      <div className="col-auto pl-0 pr-0">
+        <Editor
+          variant="new"
+          label="Add new animal"
+          onChange={(n, d) => onAdd({
+            name: n, description: d, id: 'fixme',
+          })}
         />
-        )
-      }
-      <div className="row mt-2">
-        <div className="col-12 pl-0 pr-0">
-          <div className="list-group">
-            {animals.map((animal) => <Item {...animal} onChange={onUpdate} />)}
-          </div>
+      </div>
+    </div>
+    <div className="row mt-2">
+      <div className="col-12 pl-0 pr-0">
+        <div className="list-group">
+          {animals.map((animal) => <Item {...animal} onChange={onUpdate} />)}
         </div>
       </div>
-    </>
-  );
-};
+    </div>
+  </>
+);

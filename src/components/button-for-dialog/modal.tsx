@@ -1,15 +1,12 @@
-import * as React from 'react';
-import { Animal } from '../../store/animals/types';
-
-import SelectionForm from './selection-form';
+import React, { ReactNode } from 'react';
 
 interface Props {
-  animals: Animal[];
+  title: string;
+  children: ReactNode;
   onClose: () => void;
-  onSelect: (animal: Animal) => void;
 }
 
-export default ({ animals, onClose, onSelect }: Props) => (
+export default ({ title, children, onClose }: Props) => (
   <div
     className="modal fade show"
     tabIndex={-1}
@@ -21,7 +18,7 @@ export default ({ animals, onClose, onSelect }: Props) => (
     >
       <div className="modal-content">
         <div className="modal-header">
-          <h5 className="modal-title">Select animal</h5>
+          <h5 className="modal-title">{title}</h5>
           <button
             type="button"
             className="close"
@@ -33,7 +30,7 @@ export default ({ animals, onClose, onSelect }: Props) => (
           </button>
         </div>
         <div className="modal-body">
-          <SelectionForm animals={animals} onSelect={onSelect} />
+          {children}
         </div>
       </div>
     </div>

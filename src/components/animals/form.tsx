@@ -1,14 +1,13 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 
 interface Props {
-  name?: string;
-  description?: string;
-  onChange: (k: string, v: string) => void;
+  name: string;
+  description: string;
+  onChange: (name: string, description: string) => void;
 }
 
-export default ({
-  name, description, onChange,
-}: Props) => (
+const Component = ({ name, description, onChange }: Props) => (
   <>
     <div className="form-group">
       <div className="row">
@@ -22,7 +21,7 @@ export default ({
             className="form-control"
             placeholder="Enter email"
             value={name}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange('name', e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value, description)}
           />
           <small className="form-text text-muted">
             Name for the animal.
@@ -39,7 +38,7 @@ export default ({
         rows={4}
         className="form-control"
         value={description}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => onChange('description', e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => onChange(name, e.target.value)}
       />
       <small className="form-text text-muted">
         Detailed description for the animal.
@@ -47,3 +46,16 @@ export default ({
     </div>
   </>
 );
+
+Component.propTypes = {
+  name: PropTypes.string,
+  description: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+};
+
+Component.defaultProps = {
+  name: '',
+  description: '',
+};
+
+export default Component;
