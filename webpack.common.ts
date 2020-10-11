@@ -5,7 +5,7 @@ import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin';
 import { Configuration } from 'webpack';
 
 const config: Configuration = {
-  entry: './src/index.tsx',
+  entry: ['react-hot-loader/patch', './src/index.tsx'],
   module: {
     rules: [
       {
