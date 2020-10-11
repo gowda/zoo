@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Animal } from '../../store/animals/types';
+import { AnimalProps } from '../../store/animals/types';
 
 import FilterableList from './filterable-list';
 
 interface Props {
-  animals: Animal[];
-  onSelect: (animal: Animal) => void;
+  animals: AnimalProps[];
+  onSelect: (animal: AnimalProps) => void;
 }
 
 const colors: string[] = [
@@ -25,7 +25,7 @@ export default ({ animals, onSelect }: Props) => {
               type="text"
               className="form-control"
               placeholder="Search for animal"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
+              onChange={(e: InputChangeEvent) => setQuery(e.target.value)}
             />
           </div>
         </div>

@@ -1,5 +1,5 @@
 import {
-  Animal, ActionTypes, ADD_ANIMAL, UPDATE_ANIMAL,
+  Animal, ActionTypes, ADD_ANIMAL, UPDATE_ANIMAL, AnimalAttrs,
 } from './types';
 
 const mockAnimals: Animal[] = [
@@ -135,6 +135,11 @@ const mockAnimals: Animal[] = [
   },
 ];
 
+const defaultAnimalAttrs: AnimalAttrs = {
+  name: '',
+  description: '',
+};
+
 const initialState: Animal[] = mockAnimals;
 
 export default (state = initialState, action: ActionTypes): Animal[] => {
@@ -142,13 +147,20 @@ export default (state = initialState, action: ActionTypes): Animal[] => {
     case ADD_ANIMAL: {
       return [
         ...state,
-        { ...action.payload },
+        {
+          name: action.payload.name || defaultAnimalAttrs.name!,
+          description: action.payload.description || defaultAnimalAttrs.description!,
+          id: `${(new Date()).getTime()}`,
+        },
       ];
     }
     case UPDATE_ANIMAL: {
       return state.map((cage) => {
-        if (cage.id === action.payload.id) {
-          return { ...action.payload };
+        if (cage.id === action.id) {
+          return {
+            ...cage,
+            ...action.payload,
+          };
         }
         return { ...cage };
       });

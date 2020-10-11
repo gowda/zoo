@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { Animal } from '../../store/animals/types';
+import { AnimalAttrs, AnimalProps } from '../../store/animals/types';
 
 import Editor from './editor';
 import Item from './item';
 
 interface Props {
-  animals: Animal[];
-  onAdd: (animal: Animal) => void;
-  onUpdate: (animal: Animal) => void;
+  animals: AnimalProps[];
+  onAdd: (attrs: AnimalAttrs) => void;
+  onUpdate: (id: string, attrs: AnimalAttrs) => void;
 }
 
 export default ({
@@ -33,16 +33,16 @@ export default ({
         <Editor
           variant="new"
           label="Add new animal"
-          onChange={(n, d) => onAdd({
-            name: n, description: d, id: 'fixme',
-          })}
+          onChange={onAdd}
         />
       </div>
     </div>
     <div className="row mt-2">
       <div className="col-12 pl-0 pr-0">
         <div className="list-group">
-          {animals.map((animal) => <Item {...animal} onChange={onUpdate} />)}
+          {animals.map((animal) => (
+            <Item {...animal} onChange={(attrs) => onUpdate(animal.id, attrs)} />
+          ))}
         </div>
       </div>
     </div>

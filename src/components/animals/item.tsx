@@ -1,12 +1,11 @@
 import * as React from 'react';
 
 import Editor from './editor';
-import { Animal } from '../../store/animals/types';
+import { AnimalAttrs, AnimalProps } from '../../store/animals/types';
 
-type Props = Animal & { onChange: (a: Animal) => void};
+type Props = AnimalProps & { onChange: (attrs: AnimalAttrs) => void};
 
 export default ({
-  id,
   name,
   description,
   onChange,
@@ -25,9 +24,7 @@ export default ({
             label="Edit"
             name={name}
             description={description}
-            onChange={(n, d) => onChange({
-              name: n, description: d, id,
-            })}
+            onChange={onChange}
           />
         </div>
       </div>

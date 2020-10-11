@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { AnimalAttrs } from '../../store/animals/types';
 
 interface Props {
   name: string;
   description: string;
-  onChange: (name: string, description: string) => void;
+  onChange: (attrs: AnimalAttrs) => void;
 }
 
 export default ({ name, description, onChange }: Props) => (
@@ -11,16 +12,16 @@ export default ({ name, description, onChange }: Props) => (
     <div className="form-group">
       <div className="row">
         <div className="col-12">
-          <label htmlFor="cage-form-name">
+          <label htmlFor="animal-form-name">
             Name
           </label>
           <input
             id="animal-form-name"
             type="text"
             className="form-control"
-            placeholder="Enter email"
+            placeholder="Enter name"
             value={name}
-            onChange={(e: InputChangeEvent) => onChange(e.target.value, description)}
+            onChange={(e: InputChangeEvent) => onChange({ name: e.target.value })}
           />
           <small className="form-text text-muted">
             Name for the animal.
@@ -37,7 +38,7 @@ export default ({ name, description, onChange }: Props) => (
         rows={4}
         className="form-control"
         value={description}
-        onChange={(e: TextAreaChangeEvent) => onChange(name, e.target.value)}
+        onChange={(e: TextAreaChangeEvent) => onChange({ description: e.target.value })}
       />
       <small className="form-text text-muted">
         Detailed description for the animal.

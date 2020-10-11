@@ -1,4 +1,4 @@
-import { Animal } from '../animals/types';
+import { Animal, AnimalProps } from '../animals/types';
 
 export interface Cage {
   id: string;
@@ -13,7 +13,7 @@ export interface CageAttrs {
   name?: string;
   description?: string;
   updatedAt?: string;
-  contents?: Animal[];
+  contents?: AnimalProps[];
 }
 
 export interface CageProps {

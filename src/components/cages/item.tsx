@@ -4,7 +4,7 @@ import Contents from './contents';
 import Editor from './editor';
 import AnimalSelector from './animal-selector';
 import { CageAttrs, CageProps } from '../../store/cages/types';
-import { Animal } from '../../store/animals/types';
+import { AnimalProps } from '../../store/animals/types';
 
 type Props = CageProps & {
   onChange: (cage: CageAttrs) => void,
@@ -30,7 +30,7 @@ export default ({
       <p className="mb-1">{description}</p>
       <Contents
         contents={contents!}
-        onChange={(cs: Animal[]) => onChange({ contents: cs })}
+        onChange={(cs: AnimalProps[]) => onChange({ contents: cs })}
       />
       <small className="text-muted">{updatedAt}</small>
       <div className="row">
@@ -46,7 +46,7 @@ export default ({
         </div>
         <div className="col-auto">
           <AnimalSelector
-            onSelect={(animal: Animal) => onChange({
+            onSelect={(animal: AnimalProps) => onChange({
               contents: [...contents, animal],
             })}
           />

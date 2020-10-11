@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { RootState } from '../../store';
-import { ADD_ANIMAL, Animal, UPDATE_ANIMAL } from '../../store/animals/types';
+import { ADD_ANIMAL, AnimalAttrs, UPDATE_ANIMAL } from '../../store/animals/types';
 import Component from '../../components/animals';
 
 const mapState = (state: RootState) => ({
@@ -8,8 +8,8 @@ const mapState = (state: RootState) => ({
 });
 
 const mapDispatch = {
-  onAdd: (animal: Animal) => ({ type: ADD_ANIMAL, payload: animal }),
-  onUpdate: (animal: Animal) => ({ type: UPDATE_ANIMAL, payload: animal }),
+  onAdd: (attrs: AnimalAttrs) => ({ type: ADD_ANIMAL, payload: attrs }),
+  onUpdate: (id: string, attrs: AnimalAttrs) => ({ type: UPDATE_ANIMAL, id, payload: attrs }),
 };
 
 export default connect(mapState, mapDispatch)(Component);
