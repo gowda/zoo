@@ -22,6 +22,7 @@ export default ({
       <div className="row">
         <div className="col-auto">
           <Editor
+            label="Edit"
             name={name}
             description={description}
             onChange={(n, d) => onChange({

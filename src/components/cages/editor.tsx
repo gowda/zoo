@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 import ButtonForDailog from '../button-for-dialog';
 import Form from './form';
@@ -12,7 +11,7 @@ interface Props {
   onChange: (name: string, description: string) => void
 }
 
-const Component = ({
+export default ({
   label, variant, name, description, onChange,
 }: Props) => {
   const [cage, setCage] = React.useState<any>({ name, description });
@@ -47,19 +46,3 @@ const Component = ({
     </>
   );
 };
-
-Component.propTypes = {
-  label: PropTypes.string,
-  variant: PropTypes.string,
-  name: PropTypes.string,
-  description: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-};
-
-Component.defaultProps = {
-  label: 'Edit',
-  name: '',
-  description: '',
-};
-
-export default Component;

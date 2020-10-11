@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 import { Cage } from '../../store/cages/types';
 
@@ -12,9 +11,7 @@ interface Props {
   onUpdate: (cage: Cage) => void;
 }
 
-const Component = ({
-  cages, onAdd, onUpdate,
-}: Props) => {
+export default ({ cages, onAdd, onUpdate }: Props) => {
   const [nextId, setNextId] = React.useState<number>(cages.length + 1);
 
   return (
@@ -55,24 +52,3 @@ const Component = ({
     </>
   );
 };
-
-Component.propTypes = {
-  cages: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      contents: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          name: PropTypes.string.isRequired,
-          description: PropTypes.string.isRequired,
-        }),
-      ).isRequired,
-    }),
-  ),
-  onAdd: PropTypes.func.isRequired,
-  onUpdate: PropTypes.func.isRequired,
-};
-
-export default Component;

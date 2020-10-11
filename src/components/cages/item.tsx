@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 import Contents from './contents';
 import Editor from './editor';
@@ -9,7 +8,7 @@ import { Animal } from '../../store/animals/types';
 
 type Props = Cage & { onChange: (c: Cage) => void};
 
-const Component = ({
+export default ({
   id,
   name,
   description,
@@ -38,6 +37,7 @@ const Component = ({
       <div className="row">
         <div className="col-auto">
           <Editor
+            label="Edit"
             name={name}
             description={description}
             onChange={(n, d) => onChange({
@@ -56,20 +56,3 @@ const Component = ({
     </div>
   </>
 );
-
-Component.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  lastUpdated: PropTypes.string.isRequired,
-  contents: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string,
-    }),
-  ),
-  onChange: PropTypes.func.isRequired,
-};
-
-export default Component;

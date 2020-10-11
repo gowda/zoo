@@ -6,9 +6,7 @@ interface Props {
   onChange: (contents: Animal[]) => void;
 }
 
-export default ({
-  contents, onChange,
-}: Props) => (
+export default ({ contents, onChange }: Props) => (
   <div className="row">
     <div className="col">
       {

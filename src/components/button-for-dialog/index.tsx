@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 import Modal from './modal';
 
@@ -10,7 +9,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Component = ({
+export default ({
   label, variant, title, children,
 }: Props) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
@@ -38,12 +37,3 @@ const Component = ({
     </>
   );
 };
-
-Component.propTypes = {
-  label: PropTypes.string.isRequired,
-  variant: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-};
-
-export default Component;
