@@ -3,16 +3,17 @@ import * as React from 'react';
 import Contents from './contents';
 import Editor from './editor';
 import AnimalSelector from './animal-selector';
-import { Cage } from '../../store/cages/types';
+import { CageAttrs, CageProps } from '../../store/cages/types';
 import { Animal } from '../../store/animals/types';
 
-type Props = Cage & { onChange: (c: Cage) => void};
+type Props = CageProps & {
+  onChange: (cage: CageAttrs) => void,
+};
 
 export default ({
-  id,
   name,
   description,
-  lastUpdated,
+  updatedAt,
   contents,
   onChange,
 }: Props) => (
@@ -28,12 +29,10 @@ export default ({
       </div>
       <p className="mb-1">{description}</p>
       <Contents
-        contents={contents}
-        onChange={(c: Animal[]) => onChange({
-          id, name, description, contents: c, lastUpdated: 'Just now',
-        })}
+        contents={contents!}
+        onChange={(cs: Animal[]) => onChange({ contents: cs })}
       />
-      <small className="text-muted">{lastUpdated}</small>
+      <small className="text-muted">{updatedAt}</small>
       <div className="row">
         <div className="col-auto">
           <Editor
@@ -41,14 +40,14 @@ export default ({
             name={name}
             description={description}
             onChange={(n, d) => onChange({
-              name: n, description: d, id, lastUpdated, contents,
+              name: n, description: d,
             })}
           />
         </div>
         <div className="col-auto">
           <AnimalSelector
-            onSelect={(a: Animal) => onChange({
-              id, name, description, lastUpdated: 'Just now', contents: [...contents, a],
+            onSelect={(animal: Animal) => onChange({
+              contents: [...contents, animal],
             })}
           />
         </div>

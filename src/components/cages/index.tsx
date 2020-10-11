@@ -1,22 +1,19 @@
 import * as React from 'react';
 
-import { Cage } from '../../store/cages/types';
+import { CageProps, CageAttrs } from '../../store/cages/types';
 
 import Editor from './editor';
 import Item from './item';
 
 interface Props {
-  cages: Cage[];
-  onAdd: (cage: Cage) => void;
-  onUpdate: (cage: Cage) => void;
+  cages: CageProps[];
+  onAdd: (cage: CageAttrs) => void;
+  onUpdate: (id: string, cage: CageAttrs) => void;
 }
 
-export default ({ cages, onAdd, onUpdate }: Props) => {
-  const [nextId, setNextId] = React.useState<number>(cages.length + 1);
-
-  return (
-    <>
-      {
+export default ({ cages, onAdd, onUpdate }: Props) => (
+  <>
+    {
         cages.length === 0
           && (
           <>
@@ -30,27 +27,25 @@ export default ({ cages, onAdd, onUpdate }: Props) => {
           </>
           )
       }
-      <div className="row">
-        <Editor
-          variant="new"
-          label="Add new cage"
-          onChange={(n, d) => {
-            onAdd({
-              id: `${nextId}`, name: n, description: d, lastUpdated: 'Just now', contents: [],
-            });
-            setNextId(nextId + 1);
-          }}
-        />
-      </div>
-      <div className="row mt-2">
-        <div className="col-12 pl-0 pr-0">
-          <div className="list-group">
-            {cages.map((cage) => (
-              <Item key={cage.id} {...cage} onChange={onUpdate} />
-            ))}
-          </div>
+    <div className="row">
+      <Editor
+        variant="new"
+        label="Add new cage"
+        onChange={(n, d) => onAdd({ name: n, description: d })}
+      />
+    </div>
+    <div className="row mt-2">
+      <div className="col-12 pl-0 pr-0">
+        <div className="list-group">
+          {cages.map((cage) => (
+            <Item
+              key={cage.id}
+              {...cage}
+              onChange={(attrs: CageAttrs) => onUpdate(cage.id, attrs)}
+            />
+          ))}
         </div>
       </div>
-    </>
-  );
-};
+    </div>
+  </>
+);

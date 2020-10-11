@@ -37,7 +37,7 @@ describe('Cages', () => {
       render(
         <Cages
           cages={[{
-            id: 'test-id', name: 'test cage', description: 'test description', lastUpdated: 'just now', contents: [],
+            id: 'test-id', name: 'test cage', description: 'test description', updatedAt: 'just now', contents: [],
           }]}
           onAdd={() => null}
           onUpdate={() => null}

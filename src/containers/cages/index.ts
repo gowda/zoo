@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
 import { RootState } from '../../store';
-import { ADD_CAGE, Cage, UPDATE_CAGE } from '../../store/cages/types';
+import { ADD_CAGE, CageAttrs, UPDATE_CAGE } from '../../store/cages/types';
 
 import Component from '../../components/cages';
 
 const mapState = (state: RootState) => ({
-  cages: state.cages,
+  cages: state.cages.map((c) => ({ ...c, updatedAt: c.updatedAt.toString() })),
 });
 
 const mapDispatch = {
-  onAdd: (cage: Cage) => ({ type: ADD_CAGE, payload: cage }),
-  onUpdate: (cage: Cage) => ({ type: UPDATE_CAGE, payload: cage }),
+  onAdd: (cage: CageAttrs) => ({ type: ADD_CAGE, payload: cage }),
+  onUpdate: (id: string, cage: CageAttrs) => ({ type: UPDATE_CAGE, id, payload: cage }),
 };
 
 export default connect(mapState, mapDispatch)(Component);
