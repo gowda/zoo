@@ -39,9 +39,7 @@ export default ({
             label="Edit"
             name={name}
             description={description}
-            onChange={(n, d) => onChange({
-              name: n, description: d,
-            })}
+            onChange={onChange}
           />
         </div>
         <div className="col-auto">

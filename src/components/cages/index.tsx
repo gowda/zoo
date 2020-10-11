@@ -31,7 +31,7 @@ export default ({ cages, onAdd, onUpdate }: Props) => (
       <Editor
         variant="new"
         label="Add new cage"
-        onChange={(n, d) => onAdd({ name: n, description: d })}
+        onChange={onAdd}
       />
     </div>
     <div className="row mt-2">

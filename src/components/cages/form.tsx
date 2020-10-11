@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { CageAttrs } from '../../store/cages/types';
 
 interface Props {
   name: string;
   description: string;
-  onChange: (name: string, description: string) => void;
+  onChange: (attrs: CageAttrs) => void;
 }
 
 export default ({ name, description, onChange }: Props) => (
@@ -16,11 +17,10 @@ export default ({ name, description, onChange }: Props) => (
           </label>
           <input
             id="cage-form-name"
-            type="email"
             className="form-control"
-            placeholder="Enter email"
+            placeholder="Enter name"
             value={name}
-            onChange={(e: InputChangeEvent) => onChange(e.target.value, description)}
+            onChange={(e: InputChangeEvent) => onChange({ name: e.target.value })}
           />
           <small className="form-text text-muted">
             Name for the cage.
@@ -37,7 +37,7 @@ export default ({ name, description, onChange }: Props) => (
         rows={4}
         className="form-control"
         value={description}
-        onChange={(e: TextAreaChangeEvent) => onChange(name, e.target.value)}
+        onChange={(e: TextAreaChangeEvent) => onChange({ description: e.target.value })}
       />
       <small className="form-text text-muted">
         Detailed description for the cage.
