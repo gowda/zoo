@@ -45,7 +45,9 @@ export default ({ cages, onAdd, onUpdate }: Props) => {
       <div className="row mt-2">
         <div className="col-12 pl-0 pr-0">
           <div className="list-group">
-            {cages.map((cage) => <Item {...cage} onChange={onUpdate} />)}
+            {cages.map((cage) => (
+              <Item key={cage.id} {...cage} onChange={onUpdate} />
+            ))}
           </div>
         </div>
       </div>

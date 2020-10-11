@@ -26,28 +26,16 @@ export default () => (
             </Route>
           </Switch>
 
-          <div className="row">
+          <div className="row footer">
             <div className="col-12 pl-0 pr-0">
-              <div className="list-group list-group-flush list-group-horizontal d-flex justify-content-center">
-                <Link
-                  to="/categories"
-                  className="list-group-item"
-                  style={{ backgroundColor: 'transparent', border: 'none' }}
-                >
+              <div className="link list-group list-group-flush list-group-horizontal d-flex justify-content-center">
+                <Link to="/categories" className="link list-group-item">
                   Categories
                 </Link>
-                <Link
-                  to="/"
-                  className="list-group-item"
-                  style={{ backgroundColor: 'transparent', border: 'none' }}
-                >
+                <Link to="/" className="link list-group-item">
                   Cages
                 </Link>
-                <Link
-                  to="/animals"
-                  className="list-group-item"
-                  style={{ backgroundColor: 'transparent', border: 'none' }}
-                >
+                <Link to="/animals" className="link list-group-item">
                   Animals
                 </Link>
               </div>
